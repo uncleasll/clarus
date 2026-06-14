@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useId, useState } from 'react'
 import type { Route } from '../App'
 import { languages, type Copy, type Lang } from '../i18n'
 
@@ -20,6 +20,7 @@ type Props = {
 export default function Navbar({ t, lang, route, setLang, navigate }: Props) {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const menuId = useId()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 14)
@@ -27,13 +28,6 @@ export default function Navbar({ t, lang, route, setLang, navigate }: Props) {
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
-
-  useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [open])
 
   const navLinks = navRoutes.map((item) => ({ ...item, label: t.nav[item.index] }))
   const currentLanguage = languages.find((item) => item.code === lang)?.label ?? 'UZ'
@@ -111,85 +105,68 @@ export default function Navbar({ t, lang, route, setLang, navigate }: Props) {
 
         <button
           type="button"
-          className="flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-white text-navy shadow-sm md:hidden"
-          onClick={() => setOpen(true)}
-          aria-label="Open menu"
+          className="relative z-[70] flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-white text-navy shadow-sm md:hidden"
+          onClick={() => setOpen((value) => !value)}
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-controls={menuId}
+          aria-expanded={open}
         >
           <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M4 7h16M4 12h16M4 17h16" />
+            {open ? (
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 7h16M4 12h16M4 17h16" />
+            )}
           </svg>
         </button>
       </div>
 
       {open && (
-        <div className="fixed inset-0 z-50 bg-navy/30 p-4 backdrop-blur-sm md:hidden">
-          <div className="flex h-full flex-col rounded-3xl border border-border bg-white shadow-2xl">
-            <div className="flex items-center justify-between border-b border-border p-4">
-              <button type="button" onClick={() => go('/')} className="flex items-center gap-3">
-                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-navy text-sm font-bold text-white">C</span>
-                <span className="font-display text-xl font-bold text-navy">{t.brand}</span>
-              </button>
-              <button
-                type="button"
-                className="flex h-10 w-10 items-center justify-center rounded-xl bg-gray-100 text-navy"
-                onClick={() => setOpen(false)}
-                aria-label="Close menu"
-              >
-                <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
+        <div id={menuId} className="mx-auto mt-3 max-w-7xl md:hidden">
+          <div className="rounded-3xl border border-border bg-white/98 p-4 shadow-2xl shadow-navy/20 backdrop-blur-xl animate-fade-down">
+            <div className="mb-4 grid grid-cols-3 gap-2 rounded-2xl bg-gray-100 p-1.5">
+              {languages.map((item) => (
+                <button
+                  key={item.code}
+                  type="button"
+                  onClick={() => setLang(item.code)}
+                  className={`rounded-xl px-3 py-3 text-sm font-bold transition-colors ${
+                    lang === item.code ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'bg-white text-muted'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
             </div>
 
-            <div className="flex-1 overflow-y-auto p-4">
-              <div className="mb-5 rounded-2xl border border-border bg-gray-50 p-2">
-                <div className="grid grid-cols-3 gap-2">
-                  {languages.map((item) => (
-                    <button
-                      key={item.code}
-                      type="button"
-                      onClick={() => setLang(item.code)}
-                      className={`rounded-xl px-3 py-3 text-sm font-bold transition-colors ${
-                        lang === item.code ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'bg-white text-muted'
-                      }`}
-                    >
-                      {item.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="grid gap-2">
-                {navLinks.map((item) => {
-                  const active = route === item.route
-                  return (
-                    <button
-                      key={item.route}
-                      type="button"
-                      onClick={() => go(item.route)}
-                      className={`flex items-center justify-between rounded-2xl border px-4 py-4 text-left text-base font-bold transition-colors ${
-                        active ? 'border-primary/20 bg-primary/10 text-primary' : 'border-border bg-white text-navy'
-                      }`}
-                    >
-                      <span>{item.label}</span>
-                      <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                      </svg>
-                    </button>
-                  )
-                })}
-              </div>
+            <div className="grid gap-2">
+              {navLinks.map((item) => {
+                const active = route === item.route
+                return (
+                  <button
+                    key={item.route}
+                    type="button"
+                    onClick={() => go(item.route)}
+                    className={`flex min-h-14 items-center justify-between rounded-2xl border px-4 py-3 text-left text-base font-bold transition-colors ${
+                      active ? 'border-primary/20 bg-primary/10 text-primary' : 'border-border bg-white text-navy'
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                    <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                )
+              })}
             </div>
 
-            <div className="border-t border-border p-4">
-              <button
-                type="button"
-                onClick={() => go('/contact')}
-                className="flex w-full items-center justify-center rounded-2xl bg-primary px-5 py-4 text-sm font-bold text-white shadow-lg shadow-primary/20"
-              >
-                {t.cta} · {currentLanguage}
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={() => go('/contact')}
+              className="mt-4 flex min-h-14 w-full items-center justify-center rounded-2xl bg-primary px-5 py-4 text-sm font-bold text-white shadow-lg shadow-primary/20"
+            >
+              {t.cta} · {currentLanguage}
+            </button>
           </div>
         </div>
       )}
