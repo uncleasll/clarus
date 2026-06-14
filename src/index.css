@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply bg-white text-ink font-sans antialiased; }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .animation-delay-200 { animation-delay: 200ms; }
+  .animation-delay-400 { animation-delay: 400ms; }
+}
+
+@layer components {
+  .page-section {
+    @apply relative min-h-screen overflow-hidden pt-36 pb-24 sm:pt-40 sm:pb-28;
+    animation: fadeUp 560ms ease both;
+  }
+
+  .page-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 85% 8%, rgba(15, 107, 95, 0.09), transparent 30%),
+      linear-gradient(to bottom, rgba(248, 250, 252, 0.7), rgba(255, 255, 255, 0));
+  }
+
+  .page-section > * {
+    position: relative;
+  }
+
+  .premium-badge {
+    @apply inline-flex items-center gap-2 rounded-full border border-border px-3 py-1.5 text-xs font-bold uppercase tracking-wide shadow-sm;
+  }
+
+  .premium-card {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl hover:shadow-navy/10;
+  }
+
+  .section-panel {
+    @apply rounded-[1.75rem] border border-border bg-white/85 p-6 shadow-xl shadow-navy/5 backdrop-blur sm:p-8;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatSoft {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes barRise {
+  from {
+    transform: scaleY(0.25);
+    transform-origin: bottom;
+  }
+  to {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-35%);
+  }
+  100% {
+    transform: translateX(45%);
+  }
+}
+
+@layer utilities {
+  .animate-fade-up {
+    animation: fadeUp 620ms ease both;
+  }
+
+  .animate-fade-down {
+    animation: fadeDown 500ms ease both;
+  }
+
+  .animate-float-soft {
+    animation: fadeUp 700ms ease both, floatSoft 5.5s ease-in-out 900ms infinite;
+  }
+
+  .animate-bar-rise {
+    animation: barRise 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    transform-origin: bottom;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2.8s ease-in-out infinite alternate;
+  }
+}
