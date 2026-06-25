@@ -1,12 +1,14 @@
 import { useEffect, useId, useState } from 'react'
 import type { Route } from '../App'
 import { languages, type Copy, type Lang } from '../i18n'
+import clarusLogo from '../assets/clarus-logo.png'
 
 const navRoutes: { route: Route; index: number }[] = [
   { route: '/about', index: 0 },
   { route: '/services', index: 1 },
   { route: '/projects', index: 2 },
   { route: '/blog', index: 3 },
+  { route: '/documents', index: 4 },
 ]
 
 type Props = {
@@ -47,14 +49,11 @@ export default function Navbar({ t, lang, route, setLang, navigate }: Props) {
         }`}
       >
         <button type="button" onClick={() => go('/')} className="group flex items-center gap-3">
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-navy text-sm font-bold text-white shadow-sm transition-transform duration-300 group-hover:scale-105">
-            C
+          <span className="flex h-10 w-10 items-center justify-center transition-transform duration-300 group-hover:scale-105">
+            <img src={clarusLogo} alt="" className="h-10 w-10 object-contain" />
           </span>
           <span className="text-left">
             <span className="block font-display text-xl font-bold tracking-tight text-navy">{t.brand}</span>
-            <span className="hidden text-[11px] font-semibold uppercase tracking-[0.18em] text-muted sm:block">
-              Accounting office
-            </span>
           </span>
         </button>
 

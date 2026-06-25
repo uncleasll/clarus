@@ -1,5 +1,6 @@
 import type { Copy } from '../i18n'
 import type { Route } from '../App'
+import clarusLogo from '../assets/clarus-logo.png'
 
 export default function Footer({ t, navigate }: { t: Copy; navigate: (route: Route) => void }) {
   return (
@@ -8,8 +9,8 @@ export default function Footer({ t, navigate }: { t: Copy; navigate: (route: Rou
         <div className="grid md:grid-cols-4 gap-10 mb-12">
           <div className="md:col-span-2">
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-white font-display font-bold text-sm">C</span>
+              <div className="flex h-8 w-8 items-center justify-center">
+                <img src={clarusLogo} alt="" className="h-8 w-8 object-contain" />
               </div>
               <span className="font-display font-bold text-xl tracking-tight">{t.brand}</span>
             </div>

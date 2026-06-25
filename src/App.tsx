@@ -5,13 +5,14 @@ import About from './components/About'
 import Services from './components/Services'
 import Projects from './components/Projects'
 import Blog from './components/Blog'
+import Documents from './components/Documents'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import { copy, type Lang } from './i18n'
 
-export type Route = '/' | '/about' | '/services' | '/projects' | '/blog' | '/contact'
+export type Route = '/' | '/about' | '/services' | '/projects' | '/blog' | '/documents' | '/contact'
 
-const routes: Route[] = ['/', '/about', '/services', '/projects', '/blog', '/contact']
+const routes: Route[] = ['/', '/about', '/services', '/projects', '/blog', '/documents', '/contact']
 
 function getRoute(): Route {
   const path = window.location.pathname.replace(/\/$/, '') || '/'
@@ -46,6 +47,8 @@ export default function App() {
         return <Projects t={t} />
       case '/blog':
         return <Blog t={t} />
+      case '/documents':
+        return <Documents t={t} />
       case '/contact':
         return <Contact t={t} />
       default:

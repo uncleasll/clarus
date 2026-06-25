@@ -9,7 +9,7 @@ export const languages: { code: Lang; label: string }[] = [
 export const copy = {
   uz: {
     brand: 'Clarus',
-    nav: ['Biz haqimizda', 'Xizmatlar', 'Loyihalar', 'Blog', 'Aloqa'],
+    nav: ['Biz haqimizda', 'Xizmatlar', 'Loyihalar', 'Blog', 'Hujjatlar', 'Aloqa'],
     cta: 'Bog‘lanish',
     hero: {
       badge: 'Premium buxgalteriya xizmati',
@@ -85,6 +85,17 @@ export const copy = {
         ['Case study', 'Qurilish firmasi uchun soliq yukini 20% ga kamaytirish tajribasi', 'Real loyiha misolida soliq yukini qonuniy yo‘llar bilan optimallashtirish va buxgalteriya tizimini tartibga solish jarayonini ko‘rib chiqamiz.', '18 Aprel, 2025', '6 daqiqa'],
       ],
     },
+    documents: {
+      badge: 'Hujjatlar',
+      title: 'Kodekslar va BHMS kutubxonasi',
+      text: 'Buxgalteriya, soliq va huquqiy jarayonlarda kerak bo‘ladigan PDF hujjatlar bir joyda jamlandi.',
+      codesTitle: 'Kodekslar',
+      codesText: 'O‘zbekiston Respublikasi kodekslari va mehnat munosabatlari bo‘yicha asosiy huquqiy hujjatlar.',
+      bhmsTitle: 'BHMS',
+      bhmsText: 'Buxgalteriya hisobining milliy standartlari bo‘yicha PDF hujjatlar.',
+      view: 'Ko‘rish',
+      download: 'Yuklab olish',
+    },
     contact: {
       badge: 'Aloqa',
       title: 'Moliyaviy tartibni bugundan boshlang',
@@ -115,7 +126,7 @@ export const copy = {
   },
   en: {
     brand: 'Clarus',
-    nav: ['About', 'Services', 'Projects', 'Blog', 'Contact'],
+    nav: ['About', 'Services', 'Projects', 'Blog', 'Documents', 'Contact'],
     cta: 'Contact us',
     hero: {
       badge: 'Premium accounting services',
@@ -167,6 +178,17 @@ export const copy = {
       read: 'Read',
       posts: [['Practical advice', '5 accounting tips for a newly opened business', 'Keeping documents accurate from day one, choosing the right tax system and submitting reports on time are key steps for a new business.', 'June 12, 2025', '5 min'], ['Regulation', 'Common VAT and tax reporting mistakes', 'We explain complex tax topics in clear language and show how to avoid mistakes that can lead to penalties.', 'May 3, 2025', '7 min'], ['Case study', 'How we reduced a construction firm tax burden by 20%', 'A real project example showing legal tax optimization and the process of organizing the accounting system.', 'April 18, 2025', '6 min']],
     },
+    documents: {
+      badge: 'Documents',
+      title: 'Codes and NAS library',
+      text: 'PDF documents for accounting, tax and legal workflows collected in one place.',
+      codesTitle: 'Codes',
+      codesText: 'Key legal documents, including Uzbekistan codes and labor regulation materials.',
+      bhmsTitle: 'National Accounting Standards',
+      bhmsText: 'PDF documents for Uzbekistan national accounting standards.',
+      view: 'View',
+      download: 'Download',
+    },
     contact: {
       badge: 'Contact',
       title: 'Start building financial order today',
@@ -197,7 +219,7 @@ export const copy = {
   },
   ru: {
     brand: 'Clarus',
-    nav: ['О нас', 'Услуги', 'Проекты', 'Блог', 'Контакты'],
+    nav: ['О нас', 'Услуги', 'Проекты', 'Блог', 'Документы', 'Контакты'],
     cta: 'Связаться',
     hero: {
       badge: 'Премиальные бухгалтерские услуги',
@@ -248,6 +270,17 @@ export const copy = {
       text: 'Практический контент о налогах, бухгалтерии, законодательстве и реальном опыте проектов',
       read: 'Читать',
       posts: [['Советы', '5 советов по бухгалтерии для нового бизнеса', 'Правильные документы с первого дня, выбор налоговой системы и своевременная отчетность - ключевые шаги для нового бизнеса.', '12 июня 2025', '5 мин'], ['Законодательство', 'Частые ошибки по НДС и налоговой отчетности', 'Сложные налоговые темы объясняем простым языком и показываем, как избежать ошибок, ведущих к штрафам.', '3 мая 2025', '7 мин'], ['Кейс', 'Как мы снизили налоговую нагрузку строительной компании на 20%', 'Реальный пример законной налоговой оптимизации и наведения порядка в системе бухгалтерского учета.', '18 апреля 2025', '6 мин']],
+    },
+    documents: {
+      badge: 'Документы',
+      title: 'Библиотека кодексов и НСБУ',
+      text: 'PDF-документы для бухгалтерских, налоговых и правовых процессов собраны в одном месте.',
+      codesTitle: 'Кодексы',
+      codesText: 'Основные правовые документы, включая кодексы Узбекистана и материалы по трудовым отношениям.',
+      bhmsTitle: 'НСБУ',
+      bhmsText: 'PDF-документы по национальным стандартам бухгалтерского учета.',
+      view: 'Открыть',
+      download: 'Скачать',
     },
     contact: {
       badge: 'Контакты',
